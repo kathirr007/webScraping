@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+    <h3>Random image from GIPHY with tag named well-done</h3>
+    <img src="" id="giphy-embed" alt="">
+
+    <script>
+        $(document).ready(function(){
+            //This is where it will go!
+            var imgSrc;
+            /* $.ajax({
+                // url: `https://api.giphy.com/v1/gifs/random?api_key=Kp9lw2L1SxHPMBnBbe3W9nSwgEo2WFp3&tag=great&rating=G&limit=1`,
+                url: "//api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=well-done&limit=1",
+                type: "GET",
+                done: function (response) {
+                    console.log(response);
+                    imgSrc = response.data.image_url;
+                    $("#giphy-embed").attr("src", imgSrc);
+                    return false;
+                },
+                fail: function (e) {
+                    console.log("uh oh");
+                }
+            }); */
+            // Assign handlers immediately after making the request,
+            // and remember the jqxhr object for this request
+            var jqxhr = $.get("//api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=well-done&limit=1", function (res) {
+                console.log(res);
+                imgSrc = res.data.image_url;
+                $("#giphy-embed").attr("src", imgSrc);
+                return false;
+            })
+            .done(function () {
+                console.log('Second function executed here')
+            })
+            .fail(function () {
+                console.log('Oh no! There is some error in processing the result')
+            })
+            /* .always(function () {
+                alert("finished");
+            }); */
+        });
+    </script>
+</body>
+</html>
